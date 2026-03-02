@@ -244,6 +244,19 @@
       background: var(--navy); border-color: var(--navy);
       color: var(--white);
     }
+    .btn-see-all {
+      background: var(--yellow); color: var(--navy);
+      border: none; border-radius: var(--r-btn);
+      padding: 8px 20px; font-family: var(--font);
+      font-size: .8rem; font-weight: 600; cursor: pointer;
+      transition: .2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      white-space: nowrap;
+    }
+    .btn-see-all:hover {
+      background: var(--yellow-dk);
+      transform: translateY(-2px);
+    }
 
     /* ============================================================
        PRODUCT GRID
@@ -554,7 +567,7 @@
       <a href="#" class="nav-brand"><i class="bi bi-laptop-fill"></i> UNIQ CELL</a>
       <ul class="nav-menu">
         <li><a href="#home">Home</a></li>
-        <li><a href="#produk">Produk</a></li>
+        <li><a href="products.html">Produk</a></li>
         <li><a href="#layanan">Layanan</a></li>
         <li><a href="#kontak">Kontak</a></li>
       </ul>
@@ -568,7 +581,7 @@
     </div>
     <div class="mob-nav" id="mobNav">
       <a href="#home" class="mob-link">Home</a>
-      <a href="#produk" class="mob-link">Produk</a>
+      <a href="products.html" class="mob-link">Katalog Produk</a>
       <a href="#layanan" class="mob-link">Layanan</a>
       <a href="#kontak" class="mob-link">Kontak</a>
     </div>
@@ -584,7 +597,7 @@
       <h1 id="heroH1">UNIQ CELL: <span>Solusi Teknologi</span> Terpercaya</h1>
       <p id="heroP">Laptop, CCTV, dan perangkat jaringan berkualitas untuk kebutuhan Anda. Harga kompetitif, garansi resmi, siap kirim seluruh Indonesia.</p>
       <div class="hero-btns" id="heroBtns">
-        <a href="#produk" class="btn-yellow">Lihat Produk <i class="bi bi-arrow-down-short"></i></a>
+        <a href="products.html" class="btn-yellow">Lihat Katalog <i class="bi bi-arrow-right-short"></i></a>
         <a href="https://wa.me/6281234567890" target="_blank" class="btn-ghost-white"><i class="bi bi-whatsapp"></i> Konsultasi Gratis</a>
       </div>
       <div class="hero-stats" id="heroStats">
@@ -611,11 +624,16 @@
       </div>
 
       <!-- Filter -->
-      <div class="filter-bar" id="filterBar">
-        <button class="f-btn active" data-filter="all"><i class="bi bi-grid me-1"></i> Semua</button>
-        <button class="f-btn" data-filter="laptop"><i class="bi bi-laptop me-1"></i> Laptop</button>
-        <button class="f-btn" data-filter="cctv"><i class="bi bi-camera-video me-1"></i> CCTV</button>
-        <button class="f-btn" data-filter="jaringan"><i class="bi bi-router me-1"></i> Jaringan</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:32px;">
+        <div class="filter-bar" id="filterBar">
+          <button class="f-btn active" data-filter="all"><i class="bi bi-grid me-1"></i> Semua</button>
+          <button class="f-btn" data-filter="laptop"><i class="bi bi-laptop me-1"></i> Laptop</button>
+          <button class="f-btn" data-filter="cctv"><i class="bi bi-camera-video me-1"></i> CCTV</button>
+          <button class="f-btn" data-filter="jaringan"><i class="bi bi-router me-1"></i> Jaringan</button>
+        </div>
+        <a href="products.html" class="btn-see-all">
+          <i class="bi bi-arrow-right"></i> Lihat Semua Produk
+        </a>
       </div>
 
       <div class="prod-grid" id="prodGrid"></div>
@@ -840,6 +858,7 @@
       list.forEach((p,i)=>{
         const el = document.createElement('div');
         el.className = 'prod-card';
+        el.style.cursor = 'pointer';
         el.innerHTML = `
           <div class="prod-img">
             <img src="${p.img}" alt="${p.name}" loading="lazy">
@@ -862,8 +881,15 @@
         grid.appendChild(el);
         gsap.to(el,{ opacity:1, y:0, duration:.55, delay:i*.06, ease:'power3.out',
           scrollTrigger:{ trigger:el, start:'top 92%', once:true } });
+        
+        // Klik ke detail produk (tapi tidak saat click tombol action)
+        el.addEventListener('click', (e)=>{
+          if(!e.target.closest('.prod-actions')) {
+            window.location.href = `product-detail.html?id=${p.id}`;
+          }
+        });
       });
-      grid.querySelectorAll('.btn-addcart').forEach(b=>b.addEventListener('click',()=>addToCart(+b.dataset.id)));
+      grid.querySelectorAll('.btn-addcart').forEach(b=>b.addEventListener('click',(e)=>{ e.stopPropagation(); addToCart(+b.dataset.id); }));
     }
 
     // ── Filter ──

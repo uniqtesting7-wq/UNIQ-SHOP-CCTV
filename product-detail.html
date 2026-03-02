@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk | UNIQ CELL</title>
+  <meta name="description" content="Detail produk UNIQ CELL - Laptop, CCTV, dan Perangkat Jaringan berkualitas.">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --navy:       #0b2b40;
+      --navy-dark:  #071e2e;
+      --navy-mid:   #1a4b6d;
+      --yellow:     #ffc107;
+      --yellow-dk:  #e0a800;
+      --green-wa:   #25D366;
+      --green-wa-dk:#128C7E;
+      --bg:         #f8fafc;
+      --white:      #ffffff;
+      --border:     #e5e9f0;
+      --text:       #1a2332;
+      --muted:      #64748b;
+      --danger:     #ef4444;
+      --font:       'Plus Jakarta Sans', sans-serif;
+      --r-card:     16px;
+      --r-btn:      50px;
+      --shadow-sm:  0 2px 8px rgba(11,43,64,0.08);
+      --shadow-md:  0 8px 24px rgba(11,43,64,0.12);
+      --shadow-lg:  0 16px 40px rgba(11,43,64,0.16);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.65; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 4px; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--navy);
+      box-shadow: 0 2px 16px rgba(11,43,64,0.18);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-size: 1.2rem; font-weight: 800;
+      color: var(--white); letter-spacing: -.02em;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-brand i { color: var(--yellow); font-size: 1.1rem; }
+    .nav-menu { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-menu a {
+      color: rgba(255,255,255,.75); font-size: .84rem; font-weight: 500;
+      padding: 6px 14px; border-radius: 6px; transition: color .2s, background .2s;
+    }
+    .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,.1); }
+    .nav-menu a.active { color: var(--yellow); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn-cart {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+      color: var(--white); border-radius: var(--r-btn);
+      padding: 7px 16px; font-family: var(--font); font-size: .82rem; font-weight: 600;
+      cursor: pointer; transition: .2s; position: relative;
+    }
+    .btn-cart:hover { background: rgba(255,255,255,.2); border-color: rgba(255,255,255,.4); }
+    .cart-dot {
+      position: absolute; top: -5px; right: -5px;
+      background: var(--yellow); color: var(--navy);
+      font-size: .62rem; font-weight: 800;
+      border-radius: 50%; width: 17px; height: 17px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-dot.bump { animation: bump .28s ease; }
+    @keyframes bump { 0%,100%{transform:scale(1)} 50%{transform:scale(1.55)} }
+    .hamburger {
+      display: none; flex-direction: column; gap: 4px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span { display: block; width: 20px; height: 2px; background: #fff; border-radius: 2px; transition: .25s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .hamburger { display: flex; }
+    }
+    .mob-nav { display: none; flex-direction: column; background: var(--navy-dark); padding: 12px 0; }
+    .mob-nav.open { display: flex; }
+    .mob-nav a { color: rgba(255,255,255,.8); padding: 12px 24px; font-size: .95rem; font-weight: 600; transition: background .2s; }
+    .mob-nav a:hover { background: rgba(255,255,255,.08); color: #fff; }
+
+    /* BREADCRUMB */
+    .breadcrumb-bar {
+      background: var(--white); border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb-inner {
+      max-width: 1200px; margin: 0 auto; padding: 12px 24px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: .78rem; color: var(--muted);
+    }
+    .breadcrumb-inner a { color: var(--muted); transition: color .2s; }
+    .breadcrumb-inner a:hover { color: var(--navy); }
+    .breadcrumb-inner i { font-size: .7rem; }
+    .breadcrumb-inner span { color: var(--navy); font-weight: 600; }
+
+    /* MAIN DETAIL SECTION */
+    .detail-section { padding: 40px 24px 60px; }
+    .detail-wrap { max-width: 1200px; margin: 0 auto; }
+    .detail-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+    }
+    @media (max-width: 860px) {
+      .detail-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    /* IMAGE GALLERY */
+    .gallery { position: sticky; top: 84px; }
+    .gallery-main {
+      border-radius: 18px; overflow: hidden;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      aspect-ratio: 4/3;
+      position: relative;
+    }
+    .gallery-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .gallery-main:hover img { transform: scale(1.04); }
+    .gallery-cat-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--navy); color: var(--white);
+      font-size: .68rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; border-radius: 50px;
+      padding: 4px 12px; display: flex; align-items: center; gap: 5px;
+    }
+    .gallery-cat-badge.cctv    { background: #b91c1c; }
+    .gallery-cat-badge.jaringan{ background: #0369a1; }
+    .gallery-badge-stok {
+      position: absolute; top: 14px; right: 14px;
+      background: #dcfce7; color: #166534;
+      font-size: .68rem; font-weight: 700; letter-spacing: .05em;
+      border-radius: 50px; padding: 4px 12px;
+      display: flex; align-items: center; gap: 5px;
+      border: 1px solid #bbf7d0;
+    }
+    .gallery-thumbs {
+      display: flex; gap: 10px; margin-top: 12px;
+    }
+    .gallery-thumb {
+      width: 72px; height: 56px; border-radius: 10px; overflow: hidden;
+      border: 2px solid var(--border); cursor: pointer; flex-shrink: 0;
+      background: var(--white); transition: border-color .2s;
+    }
+    .gallery-thumb.active { border-color: var(--navy); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* PRODUCT INFO */
+    .prod-info { display: flex; flex-direction: column; gap: 0; }
+    .prod-kategori {
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .prod-kategori::before { content:''; width:20px; height:2px; background:var(--yellow); border-radius:2px; }
+    .prod-title {
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+      color: var(--navy); line-height: 1.15; letter-spacing: -.025em;
+      margin-bottom: 10px;
+    }
+    .prod-rating {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    }
+    .stars { color: var(--yellow); font-size: .88rem; display: flex; gap: 2px; }
+    .rating-text { font-size: .78rem; color: var(--muted); }
+    .rating-text span { font-weight: 700; color: var(--text); }
+    .prod-price-box {
+      background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 14px; padding: 18px 20px; margin-bottom: 22px;
+    }
+    .prod-price-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
+    .prod-price {
+      font-size: 2rem; font-weight: 800; color: var(--navy);
+      letter-spacing: -.03em; line-height: 1;
+    }
+    .prod-price-note { font-size: .74rem; color: var(--muted); margin-top: 4px; }
+
+    /* SPEC TABLE */
+    .spec-title {
+      font-size: .82rem; font-weight: 700; color: var(--navy);
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: 12px; margin-top: 22px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .spec-title::after { content:''; flex:1; height:1px; background:var(--border); }
+    .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 22px; }
+    .spec-table tr { border-bottom: 1px solid var(--border); }
+    .spec-table tr:last-child { border-bottom: none; }
+    .spec-table td {
+      padding: 10px 0; font-size: .83rem; vertical-align: top;
+    }
+    .spec-table td:first-child {
+      width: 42%; color: var(--muted); font-weight: 500; padding-right: 12px;
+    }
+    .spec-table td:last-child { font-weight: 600; color: var(--text); }
+
+    /* ACTIONS */
+    .prod-actions-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+    .btn-yellow {
+      background: var(--yellow); color: var(--navy);
+      border: none; border-radius: var(--r-btn); padding: 14px 28px;
+      font-family: var(--font); font-size: .9rem; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-yellow:hover { background: var(--yellow-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,193,7,.4); }
+    .btn-wa-big {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--green-wa); color: #fff;
+      border: none; border-radius: var(--r-btn); padding: 14px 28px;
+      font-family: var(--font); font-size: .9rem; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .btn-wa-big:hover { background: var(--green-wa-dk); transform: translateY(-2px); color: #fff; }
+    .btn-outline {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: transparent; border: 1.5px solid var(--border);
+      color: var(--text); border-radius: var(--r-btn); padding: 13px 28px;
+      font-family: var(--font); font-size: .86rem; font-weight: 600;
+      cursor: pointer; transition: .2s;
+    }
+    .btn-outline:hover { border-color: var(--navy); color: var(--navy); background: #f0f4f8; }
+
+    /* TRUST BADGES */
+    .trust-badges {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 22px;
+    }
+    .trust-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 12px; padding: 11px 14px;
+    }
+    .trust-badge i {
+      font-size: 1.2rem; color: var(--navy); flex-shrink: 0;
+    }
+    .trust-badge-text small { display: block; font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .trust-badge-text span { font-size: .8rem; font-weight: 700; color: var(--text); }
+
+    /* SHARE / WISHLIST */
+    .prod-meta-row {
+      display: flex; align-items: center; gap: 12px; padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .meta-label { font-size: .75rem; color: var(--muted); }
+    .share-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1.5px solid var(--border); background: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); cursor: pointer; font-size: .9rem;
+      transition: .2s; text-decoration: none;
+    }
+    .share-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+    /* DESCRIPTION TABS */
+    .tabs-section { padding: 0 24px 60px; }
+    .tabs-wrap { max-width: 1200px; margin: 0 auto; }
+    .tabs-nav {
+      display: flex; gap: 0; border-bottom: 2px solid var(--border);
+      margin-bottom: 28px; overflow-x: auto;
+    }
+    .tab-btn {
+      background: none; border: none; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; padding: 12px 22px;
+      font-family: var(--font); font-size: .85rem; font-weight: 600;
+      color: var(--muted); cursor: pointer; transition: .2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--navy); }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .tab-content { font-size: .88rem; color: var(--text); line-height: 1.8; }
+    .tab-content h4 { font-size: .92rem; font-weight: 700; color: var(--navy); margin: 18px 0 8px; }
+    .tab-content ul { padding-left: 20px; }
+    .tab-content ul li { margin-bottom: 5px; }
+    .tab-content p { margin-bottom: 12px; }
+
+    /* RELATED PRODUCTS */
+    .related-section { padding: 0 24px 80px; }
+    .related-wrap { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 6px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-label::before { content:''; width:20px; height:2px; background:var(--yellow); border-radius:2px; }
+    .section-h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+      color: var(--navy); letter-spacing: -.025em; line-height: 1.1;
+      margin-bottom: 28px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .prod-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: var(--r-card); overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      cursor: pointer;
+    }
+    .prod-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--navy);
+    }
+    .prod-img-wrap {
+      height: 180px; overflow: hidden; position: relative; background: var(--bg);
+    }
+    .prod-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform .5s;
+    }
+    .prod-card:hover .prod-img-wrap img { transform: scale(1.05); }
+    .prod-cat-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--navy); color: var(--white);
+      font-size: .65rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; border-radius: 50px;
+      padding: 3px 10px; display: flex; align-items: center; gap: 4px;
+    }
+    .prod-cat-badge.cctv    { background: #b91c1c; }
+    .prod-cat-badge.jaringan{ background: #0369a1; }
+    .prod-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; }
+    .prod-name { font-size: .92rem; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 3px; }
+    .prod-spec { font-size: .76rem; color: var(--muted); flex: 1; margin-bottom: 10px; }
+    .prod-price-sm { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .prod-actions-sm { display: flex; gap: 7px; }
+    .btn-addcart-sm {
+      flex: 1; background: var(--white); border: 1.5px solid var(--border);
+      color: var(--text); border-radius: var(--r-btn);
+      padding: 8px 10px; font-family: var(--font);
+      font-size: .76rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      transition: .2s;
+    }
+    .btn-addcart-sm:hover { border-color: var(--navy); color: var(--navy); background: #f0f4f8; }
+    .btn-wa-sm {
+      flex: 1; background: var(--green-wa); border: none; color: #fff;
+      border-radius: var(--r-btn); padding: 8px 10px;
+      font-family: var(--font); font-size: .76rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+      transition: background .2s;
+    }
+    .btn-wa-sm:hover { background: var(--green-wa-dk); }
+
+    /* FOOTER */
+    .footer { background: var(--navy); padding: 56px 24px 28px; }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+      padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+    .footer-brand {
+      font-size: 1.15rem; font-weight: 800; color: var(--white);
+      display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    }
+    .footer-brand i { color: var(--yellow); }
+    .footer-desc { font-size: .82rem; color: rgba(255,255,255,.55); line-height: 1.7; margin-bottom: 16px; }
+    .footer-socials { display: flex; gap: 8px; }
+    .soc {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.7); display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; transition: .2s;
+    }
+    .soc:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .footer-col-title { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 12px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .footer-links a { font-size: .83rem; color: rgba(255,255,255,.6); transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+      padding-top: 20px; font-size: .74rem; color: rgba(255,255,255,.35);
+    }
+
+    /* CART PANEL */
+    .cart-overlay { position: fixed; inset: 0; background: rgba(11,43,64,.5); z-index: 1998; opacity: 0; pointer-events: none; transition: opacity .3s; }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+    .cart-panel {
+      position: fixed; top: 0; right: 0;
+      width: 370px; max-width: 95vw; height: 100vh;
+      background: var(--white); border-left: 1.5px solid var(--border);
+      z-index: 1999; display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+      box-shadow: -8px 0 32px rgba(11,43,64,.12);
+    }
+    .cart-panel.open { transform: translateX(0); }
+    .cart-hdr { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 60px; background: var(--navy); flex-shrink: 0; }
+    .cart-hdr-title { font-size: .95rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .cart-close-btn { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: .85rem; transition: background .2s; }
+    .cart-close-btn:hover { background: rgba(255,255,255,.28); }
+    .cart-body { flex: 1; overflow-y: auto; padding: 14px 20px; }
+    .cart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 160px; gap: 10px; color: var(--muted); }
+    .cart-empty i { font-size: 2.5rem; opacity: .25; }
+    .cart-item { display: flex; gap: 11px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .cart-item:last-child { border-bottom: none; }
+    .c-img { width: 52px; height: 52px; object-fit: cover; border-radius: 9px; border: 1px solid var(--border); flex-shrink: 0; }
+    .c-name { font-size: .79rem; font-weight: 600; line-height: 1.3; color: var(--text); margin-bottom: 2px; }
+    .c-price { font-size: .75rem; color: var(--navy); font-weight: 700; }
+    .c-qty { display: flex; align-items: center; gap: 7px; margin-top: 7px; }
+    .qty-btn { width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--border); color: var(--text); font-size: .7rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .2s; }
+    .qty-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .qty-num { font-size: .8rem; font-weight: 700; min-width: 16px; text-align: center; }
+    .c-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .85rem; padding: 2px; transition: color .2s; }
+    .c-remove:hover { color: var(--danger); }
+    .cart-ftr { padding: 16px 20px; border-top: 1px solid var(--border); flex-shrink: 0; background: var(--bg); }
+    .cart-total-row { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+    .btn-checkout { width: 100%; background: var(--green-wa); border: none; color: #fff; border-radius: var(--r-btn); padding: 12px; font-family: var(--font); font-size: .85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; margin-bottom: 8px; transition: background .2s; }
+    .btn-checkout:hover { background: var(--green-wa-dk); }
+    .btn-checkout:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-clear { width: 100%; background: transparent; border: 1.5px solid var(--border); color: var(--muted); border-radius: var(--r-btn); padding: 9px; font-family: var(--font); font-size: .79rem; font-weight: 600; cursor: pointer; transition: .2s; }
+    .btn-clear:hover { border-color: var(--danger); color: var(--danger); }
+    .btn-clear:disabled { opacity: .3; cursor: not-allowed; }
+
+    /* TOAST */
+    .toast-stack { position: fixed; bottom: 20px; right: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
+    .toast-card { background: var(--white); border-left: 4px solid var(--green-wa); border: 1px solid var(--border); border-left-width: 4px; border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; min-width: 250px; max-width: 310px; box-shadow: var(--shadow-md); animation: toastIn .32s cubic-bezier(.175,.885,.32,1.275); }
+    .toast-card.out { animation: toastOut .25s ease forwards; }
+    @keyframes toastIn  { from{transform:translateX(110%);opacity:0} to{transform:translateX(0);opacity:1} }
+    @keyframes toastOut { to{transform:translateX(110%);opacity:0} }
+    .toast-ico { color: var(--green-wa); font-size: .95rem; }
+    .toast-txt { font-size: .79rem; font-weight: 600; color: var(--text); }
+
+    /* QTY SELECTOR */
+    .qty-selector {
+      display: flex; align-items: center; gap: 0;
+      border: 1.5px solid var(--border); border-radius: var(--r-btn);
+      overflow: hidden; width: fit-content; margin-bottom: 16px;
+    }
+    .qty-sel-btn {
+      width: 40px; height: 40px; border: none; background: var(--bg);
+      font-size: 1rem; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      color: var(--navy); transition: background .2s;
+    }
+    .qty-sel-btn:hover { background: var(--border); }
+    .qty-sel-num {
+      width: 48px; text-align: center;
+      font-size: .95rem; font-weight: 700; color: var(--navy);
+      border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+      height: 40px; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeUp .5s ease forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .fade-in:nth-child(2) { animation-delay: .1s; }
+    .fade-in:nth-child(3) { animation-delay: .2s; }
+    .fade-in:nth-child(4) { animation-delay: .3s; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><i class="bi bi-shield-fill-check"></i> UNIQ CELL</a>
+    <ul class="nav-menu">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#produk" class="active">Produk</a></li>
+      <li><a href="index.html#layanan">Layanan</a></li>
+      <li><a href="index.html#kontak">Kontak</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="btn-cart" id="cartToggle">
+        <i class="bi bi-bag"></i> Keranjang
+        <span class="cart-dot" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mob-nav" id="mobNav">
+    <a href="index.html#home" class="mob-link">Home</a>
+    <a href="index.html#produk" class="mob-link">Produk</a>
+    <a href="index.html#layanan" class="mob-link">Layanan</a>
+    <a href="index.html#kontak" class="mob-link">Kontak</a>
+  </nav>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <div class="breadcrumb-inner">
+    <a href="index.html">Home</a>
+    <i class="bi bi-chevron-right"></i>
+    <a href="index.html#produk">Produk</a>
+    <i class="bi bi-chevron-right"></i>
+    <span id="breadcrumbName">Detail Produk</span>
+  </div>
+</div>
+
+<!-- DETAIL SECTION -->
+<section class="detail-section">
+  <div class="detail-wrap">
+    <div class="detail-grid">
+
+      <!-- GALLERY -->
+      <div class="gallery fade-in">
+        <div class="gallery-main" id="galleryMain">
+          <img id="mainImg" src="" alt="Produk">
+          <div class="gallery-cat-badge" id="catBadge"><i class="bi" id="catIcon"></i> <span id="catLabel"></span></div>
+          <div class="gallery-badge-stok"><i class="bi bi-check-circle-fill"></i> Stok Tersedia</div>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+
+      <!-- INFO -->
+      <div class="prod-info fade-in" style="animation-delay:.15s">
+        <div class="prod-kategori" id="infoCat">Kategori</div>
+        <h1 class="prod-title" id="infoName">Nama Produk</h1>
+
+        <div class="prod-rating">
+          <div class="stars">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-half"></i>
+          </div>
+          <span class="rating-text"><span>4.8</span> / 5 &nbsp;·&nbsp; 128 ulasan</span>
+        </div>
+
+        <div class="prod-price-box">
+          <div class="prod-price-label">Harga</div>
+          <div class="prod-price" id="infoPrice">Rp 0</div>
+          <div class="prod-price-note"><i class="bi bi-info-circle"></i> Belum termasuk ongkir · Harga bisa berubah sewaktu-waktu</div>
+        </div>
+
+        <!-- SPESIFIKASI -->
+        <div class="spec-title">Spesifikasi</div>
+        <table class="spec-table" id="specTable"></table>
+
+        <!-- QTY -->
+        <div class="spec-title" style="margin-top:16px">Jumlah</div>
+        <div class="qty-selector">
+          <button class="qty-sel-btn" id="qtyMinus"><i class="bi bi-dash"></i></button>
+          <div class="qty-sel-num" id="qtyNum">1</div>
+          <button class="qty-sel-btn" id="qtyPlus"><i class="bi bi-plus"></i></button>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="prod-actions-box">
+          <button class="btn-yellow" id="btnAddCart"><i class="bi bi-bag-plus"></i> Tambah ke Keranjang</button>
+          <a class="btn-wa-big" id="btnWa" href="#" target="_blank"><i class="bi bi-whatsapp"></i> Tanya / Order via WhatsApp</a>
+          <button class="btn-outline" onclick="window.history.back()"><i class="bi bi-arrow-left"></i> Kembali ke Katalog</button>
+        </div>
+
+        <!-- TRUST BADGES -->
+        <div class="trust-badges">
+          <div class="trust-badge"><i class="bi bi-shield-check"></i><div class="trust-badge-text"><small>Jaminan</small><span>Garansi Resmi</span></div></div>
+          <div class="trust-badge"><i class="bi bi-truck"></i><div class="trust-badge-text"><small>Pengiriman</small><span>Seluruh Indonesia</span></div></div>
+          <div class="trust-badge"><i class="bi bi-headset"></i><div class="trust-badge-text"><small>Support</small><span>7 Hari / 08–21</span></div></div>
+          <div class="trust-badge"><i class="bi bi-arrow-counterclockwise"></i><div class="trust-badge-text"><small>Retur</small><span>7 Hari Retur</span></div></div>
+        </div>
+
+        <!-- SHARE -->
+        <div class="prod-meta-row">
+          <span class="meta-label">Bagikan:</span>
+          <a class="share-btn" id="shareWa" href="#" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a class="share-btn" href="#" title="Facebook" onclick="shareToFb();return false"><i class="bi bi-facebook"></i></a>
+          <a class="share-btn" href="#" title="Copy Link" onclick="copyLink();return false"><i class="bi bi-link-45deg"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<section class="tabs-section">
+  <div class="tabs-wrap fade-in" style="animation-delay:.2s">
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="deskripsi">Deskripsi</button>
+      <button class="tab-btn" data-tab="garansi">Garansi & Retur</button>
+      <button class="tab-btn" data-tab="pengiriman">Pengiriman</button>
+      <button class="tab-btn" data-tab="ulasan">Ulasan (128)</button>
+    </div>
+    <div class="tab-panel active" id="tab-deskripsi">
+      <div class="tab-content" id="tabDeskripsi">
+        <!-- filled by JS -->
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-garansi">
+      <div class="tab-content">
+        <h4>Garansi Produk</h4>
+        <ul>
+          <li>Garansi resmi dari distributor / pabrikan — berlaku sesuai ketentuan masing-masing merek.</li>
+          <li>Garansi toko UNIQ CELL 7 hari untuk masalah DOA (Dead on Arrival).</li>
+          <li>Kerusakan akibat pemakaian yang tidak sesuai tidak termasuk garansi.</li>
+        </ul>
+        <h4>Kebijakan Retur</h4>
+        <ul>
+          <li>Retur diterima dalam 7 hari sejak barang diterima dengan kondisi masih tersegel / belum dipakai.</li>
+          <li>Barang cacat / salah kirim: ongkos retur ditanggung UNIQ CELL.</li>
+          <li>Retur karena alasan pribadi: ongkos kirim ditanggung pembeli.</li>
+          <li>Hubungi kami via WhatsApp sebelum melakukan pengembalian barang.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-pengiriman">
+      <div class="tab-content">
+        <h4>Estimasi Pengiriman</h4>
+        <p>Pengiriman dilakukan melalui ekspedisi terpercaya (JNE, J&T, SiCepat, Anteraja, Wahana, dsb). Estimasi tiba 1–5 hari kerja tergantung tujuan.</p>
+        <h4>Pengiriman Same-Day</h4>
+        <p>Tersedia untuk area Jakarta & sekitarnya — hubungi kami via WhatsApp untuk konfirmasi ketersediaan.</p>
+        <h4>Packaging</h4>
+        <p>Setiap produk dikemas dengan bubble wrap dan kardus tebal untuk keamanan selama pengiriman. Produk fragile dilengkapi lapisan foam tambahan.</p>
+        <h4>Asuransi Pengiriman</h4>
+        <p>Kami menyarankan menggunakan asuransi pengiriman untuk produk bernilai tinggi. Biaya asuransi 0,2% dari nilai barang.</p>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-ulasan">
+      <div class="tab-content">
+        <p style="color:var(--muted)">Fitur ulasan akan segera hadir. Sementara itu, Anda bisa membaca ulasan di <strong>marketplace kami</strong> atau tanya langsung via WhatsApp.</p>
+        <a class="btn-wa-big" href="https://wa.me/6281234567890?text=Halo, saya ingin tanya ulasan produk" target="_blank" style="margin-top:14px;max-width:320px"><i class="bi bi-whatsapp"></i> Tanya Ulasan via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section class="related-section">
+  <div class="related-wrap">
+    <div class="section-label">Produk Lainnya</div>
+    <h2 class="section-h2" id="relatedTitle">Produk Serupa</h2>
+    <div class="related-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand"><i class="bi bi-shield-fill-check"></i> UNIQ CELL</div>
+      <p class="footer-desc">Menyediakan laptop, CCTV, dan perangkat jaringan berkualitas dengan harga terbaik dan pelayanan profesional.</p>
+      <div class="footer-socials">
+        <a href="#" class="soc"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="soc"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="soc"><i class="bi bi-tiktok"></i></a>
+        <a href="https://wa.me/6281234567890" class="soc"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigasi</div>
+      <ul class="footer-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#produk">Produk</a></li>
+        <li><a href="index.html#layanan">Layanan</a></li>
+        <li><a href="index.html#kontak">Kontak</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kategori</div>
+      <ul class="footer-links">
+        <li><a href="index.html#produk">Laptop</a></li>
+        <li><a href="index.html#produk">CCTV & Keamanan</a></li>
+        <li><a href="index.html#produk">Jaringan & Kabel</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 UNIQ CELL. All rights reserved.</span>
+    <span>Made with ♥ in Indonesia</span>
+  </div>
+</footer>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-hdr">
+    <div class="cart-hdr-title"><i class="bi bi-bag"></i> Keranjang Belanja</div>
+    <button class="cart-close-btn" id="cartClose"><i class="bi bi-x"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-ftr">
+    <div class="cart-total-row"><span>Total</span><span id="cartTotal">Rp 0</span></div>
+    <button class="btn-checkout" id="checkoutBtn" disabled><i class="bi bi-whatsapp"></i> Checkout via WhatsApp</button>
+    <button class="btn-clear" id="clearBtn" disabled>Kosongkan Keranjang</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-stack" id="toastStack"></div>
+
+<script>
+  /* ============================================================
+     CONFIG — samakan dengan index.html
+     ============================================================ */
+  const CONFIG = {
+    waNumber:  '6281234567890',
+    storeName: 'UNIQ CELL',
+  };
+
+  /* ============================================================
+     DATA PRODUK — salin dari index.html
+     ============================================================ */
+  const products = [
+    { id:1, kategori:'laptop',
+      img:'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80',
+      name:'Lenovo ThinkPad X1 Carbon', spec:'Intel Core i7 Gen 13 · 16GB RAM · 512GB SSD NVMe', price:18999000,
+      desc:'ThinkPad X1 Carbon adalah laptop bisnis premium Lenovo yang sangat ringan dan tipis. Dirancang untuk profesional yang membutuhkan performa tinggi dalam mobilitas.',
+      specs: { 'Prosesor':'Intel Core i7-1365U Gen 13', 'RAM':'16 GB LPDDR5', 'Penyimpanan':'512 GB SSD NVMe PCIe 4.0', 'Layar':'14" IPS 2.8K 90Hz Touch', 'GPU':'Intel Iris Xe Graphics', 'Baterai':'57 Wh, hingga ~15 jam', 'OS':'Windows 11 Pro', 'Berat':'1.12 kg', 'Garansi':'3 Tahun On-site' }
+    },
+    { id:2, kategori:'laptop',
+      img:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&q=80',
+      name:'MacBook Pro 14" M3 Pro', spec:'Apple M3 Pro 11‑core · 18GB Unified RAM · 1TB SSD', price:32999000,
+      desc:'MacBook Pro 14" dengan chip M3 Pro menghadirkan performa luar biasa untuk kreator konten, developer, dan profesional kreatif. Layar Liquid Retina XDR yang memukau.',
+      specs: { 'Chip':'Apple M3 Pro (11-core CPU, 14-core GPU)', 'RAM':'18 GB Unified Memory', 'Penyimpanan':'1 TB SSD', 'Layar':'14.2" Liquid Retina XDR 3024×1964', 'Kamera':'1080p FaceTime HD', 'Baterai':'70 Wh, hingga ~18 jam', 'OS':'macOS Sonoma', 'Berat':'1.61 kg', 'Garansi':'1 Tahun Apple Care' }
+    },
+    { id:3, kategori:'laptop',
+      img:'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&q=80',
+      name:'Dell XPS 13 Plus', spec:'Intel Core i7 Evo · 16GB RAM · 512GB OLED Touch', price:24499000,
+      desc:'Dell XPS 13 Plus adalah laptop ultra-premium dengan desain futuristik, layar OLED sentuh yang memukau, dan performa Intel Evo generation terbaru.',
+      specs: { 'Prosesor':'Intel Core i7-1360P Evo', 'RAM':'16 GB LPDDR5', 'Penyimpanan':'512 GB SSD NVMe', 'Layar':'13.4" OLED Touch 3.5K 60Hz', 'GPU':'Intel Iris Xe', 'Baterai':'55 Wh, hingga ~12 jam', 'OS':'Windows 11 Pro', 'Berat':'1.24 kg', 'Garansi':'1 Tahun Dell ProSupport' }
+    },
+    { id:4, kategori:'cctv',
+      img:'https://images.unsplash.com/photo-1558005530-a7958896ec60?w=800&q=80',
+      name:'Hikvision 4MP Dome IP67', spec:'IR Night Vision 30m · PoE · Lensa 2.8mm · Outdoor', price:1250000,
+      desc:'Kamera CCTV Hikvision Dome 4MP dengan ketahanan cuaca IP67, ideal untuk pemasangan outdoor. Dilengkapi IR Night Vision hingga 30 meter dan koneksi PoE.',
+      specs: { 'Resolusi':'4 MP (2560×1440)', 'Lensa':'2.8 mm Fixed', 'Night Vision':'IR hingga 30 m', 'Rating IP':'IP67 (debu & air)', 'Koneksi':'PoE (802.3af)', 'Kompresi':'H.265+ / H.264+', 'Frame Rate':'20 fps @ 4MP', 'Garansi':'2 Tahun Hikvision' }
+    },
+    { id:5, kategori:'cctv',
+      img:'https://images.unsplash.com/photo-1563019030-95fb9b5e8c3c?w=800&q=80',
+      name:'Dahua 8MP PTZ Pro', spec:'25× Optical Zoom · IR 100m · Auto‑tracking · IP66', price:4890000,
+      desc:'Kamera PTZ Dahua 8MP profesional dengan zoom optik 25x dan auto-tracking cerdas. Cocok untuk area luas seperti gudang, parkiran, dan perumahan besar.',
+      specs: { 'Resolusi':'8 MP (3840×2160)', 'Zoom Optik':'25×', 'Night Vision':'IR hingga 100 m', 'Rating IP':'IP66', 'Auto-tracking':'Ya (AI-based)', 'Koneksi':'RJ45, PoE+', 'Kompresi':'H.265+ / Smart H.265+', 'Garansi':'2 Tahun Dahua' }
+    },
+    { id:6, kategori:'cctv',
+      img:'https://images.unsplash.com/photo-1557323769-21c6d5aed4d8?w=800&q=80',
+      name:'TP‑Link Tapo C320WS', spec:'2K QHD · Night Vision · Two‑way Audio · Outdoor', price:850000,
+      desc:'Kamera outdoor TP-Link Tapo dengan resolusi 2K QHD dan audio dua arah. Mudah dipasang, terhubung ke app Tapo, dan cocok untuk rumah tinggal.',
+      specs: { 'Resolusi':'2K QHD (2560×1440)', 'Night Vision':'Smart Detection Night Vision', 'Audio':'Two-way Audio built-in', 'Rating IP':'IP66', 'WiFi':'2.4 GHz / 5 GHz dual-band', 'Penyimpanan':'microSD + Tapo Care Cloud', 'App':'Tapo (iOS & Android)', 'Garansi':'2 Tahun TP-Link' }
+    },
+    { id:7, kategori:'jaringan',
+      img:'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80',
+      name:'MikroTik RB951Ui‑2HnD', spec:'2.4 GHz Wi‑Fi · 5 Port LAN · PoE Out · USB', price:650000,
+      desc:'Router MikroTik seri RB951 yang populer untuk jaringan SOHO dan warnet. Dilengkapi 5 port Ethernet, port USB, dan output PoE untuk access point.',
+      specs: { 'CPU':'600 MHz Atheros', 'RAM':'128 MB', 'Storage':'128 MB', 'Port LAN':'5× 10/100 Mbps (1 PoE Out)', 'WiFi':'2.4 GHz 802.11b/g/n, 2T2R', 'USB':'1× USB 2.0', 'OS':'RouterOS Level 4', 'Garansi':'1 Tahun MikroTik' }
+    },
+    { id:8, kategori:'jaringan',
+      img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+      name:'TP‑Link TL‑SG108 Switch', spec:'8 Port Gigabit · Metal Housing · Plug & Play', price:380000,
+      desc:'Switch unmanaged 8 port Gigabit dari TP-Link dengan casing full-metal. Ideal untuk rumah, kantor kecil, dan warnet yang butuh koneksi stabil tanpa konfigurasi.',
+      specs: { 'Port':'8× 10/100/1000 Mbps RJ45', 'Switching Capacity':'16 Gbps', 'Forwarding Rate':'11.9 Mpps', 'MAC Address':'4K', 'Casing':'Metal (rackmount 1U)', 'Power':'Internal, 8 W max', 'Standar':'IEEE 802.3, 802.3u, 802.3ab', 'Garansi':'3 Tahun TP-Link' }
+    },
+    { id:9, kategori:'jaringan',
+      img:'https://images.unsplash.com/photo-1621977712311-3f5e4b8b5f9a?w=800&q=80',
+      name:'Kabel LAN UTP Cat6 (50 m)', spec:'Pure Copper 23AWG · 550 MHz · UV Resistant', price:350000,
+      desc:'Kabel LAN UTP Cat6 pure copper berkualitas tinggi dengan panjang 50 meter. Cocok untuk instalasi jaringan indoor maupun outdoor dengan lapisan UV resistant.',
+      specs: { 'Standar':'Cat6 UTP', 'Konduktor':'Pure Copper 23AWG', 'Bandwidth':'550 MHz', 'Kecepatan':'hingga 1 Gbps', 'Panjang':'50 meter / roll', 'Lapisan':'UV Resistant PVC', 'Warna':'Abu-abu', 'Garansi':'1 Tahun' }
+    },
+  ];
+
+  /* ============================================================ */
+  const WA  = CONFIG.waNumber;
+  const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
+  const catLabel = { laptop:'Laptop', cctv:'CCTV', jaringan:'Jaringan' };
+  const catIcon  = { laptop:'bi-laptop', cctv:'bi-camera-video', jaringan:'bi-router' };
+  let cart = JSON.parse(localStorage.getItem('uniqcell_cart') || '[]');
+  let qty = 1;
+
+  /* ── Get product ID from URL ── */
+  function getProductId() {
+    const params = new URLSearchParams(window.location.search);
+    return parseInt(params.get('id')) || 1;
+  }
+
+  /* ── Load product detail ── */
+  function loadProduct() {
+    const id = getProductId();
+    const p  = products.find(x => x.id === id) || products[0];
+
+    // Breadcrumb
+    document.getElementById('breadcrumbName').textContent = p.name;
+    document.title = p.name + ' | UNIQ CELL';
+
+    // Gallery
+    document.getElementById('mainImg').src = p.img;
+    document.getElementById('mainImg').alt = p.name;
+    const catBadge = document.getElementById('catBadge');
+    catBadge.className = 'gallery-cat-badge ' + p.kategori;
+    document.getElementById('catIcon').className = 'bi ' + catIcon[p.kategori];
+    document.getElementById('catLabel').textContent = catLabel[p.kategori];
+
+    // Thumbs (simulate multiple angles using same img with different params)
+    const thumbUrls = [
+      p.img,
+      p.img.replace('?w=800', '?w=800&sat=-30'),
+      p.img.replace('?w=800', '?w=800&bri=10'),
+      p.img.replace('?w=800', '?w=800&con=10'),
+    ].map(u => u.replace('?w=800&sat=-30','?w=400').replace('?w=800&bri=10','?w=400').replace('?w=800&con=10','?w=400'));
+
+    const thumbsContainer = document.getElementById('galleryThumbs');
+    thumbsContainer.innerHTML = '';
+    // Use the same image for thumbs (fallback since we only have 1 real image)
+    [p.img, p.img, p.img].forEach((url, i) => {
+      const d = document.createElement('div');
+      d.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+      d.innerHTML = `<img src="${url}" alt="thumb ${i+1}">`;
+      d.addEventListener('click', () => {
+        document.getElementById('mainImg').src = url;
+        document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+        d.classList.add('active');
+      });
+      thumbsContainer.appendChild(d);
+    });
+
+    // Info
+    document.getElementById('infoCat').textContent = catLabel[p.kategori];
+    document.getElementById('infoName').textContent = p.name;
+    document.getElementById('infoPrice').textContent = fmt(p.price);
+
+    // Spec table
+    const tbl = document.getElementById('specTable');
+    tbl.innerHTML = '';
+    if (p.specs) {
+      Object.entries(p.specs).forEach(([k, v]) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${k}</td><td>${v}</td>`;
+        tbl.appendChild(tr);
+      });
+    } else {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td colspan="2">${p.spec}</td>`;
+      tbl.appendChild(tr);
+    }
+
+    // Deskripsi tab
+    document.getElementById('tabDeskripsi').innerHTML = `
+      <p>${p.desc || p.spec}</p>
+      <h4>Spesifikasi Singkat</h4>
+      <p>${p.spec}</p>
+      <h4>Mengapa Memilih UNIQ CELL?</h4>
+      <ul>
+        <li>Produk 100% original dengan garansi resmi</li>
+        <li>Harga kompetitif, transparan tanpa biaya tersembunyi</li>
+        <li>Tim teknisi berpengalaman siap membantu instalasi & konfigurasi</li>
+        <li>Pengiriman aman ke seluruh Indonesia</li>
+      </ul>
+    `;
+
+    // WA button
+    const waMsg = encodeURIComponent(`Halo *${CONFIG.storeName}*, saya ingin info produk:\n*${p.name}*\nHarga: ${fmt(p.price)}\n\nApakah stok tersedia? Terima kasih.`);
+    document.getElementById('btnWa').href = `https://wa.me/${WA}?text=${waMsg}`;
+    document.getElementById('shareWa').href = `https://wa.me/?text=${encodeURIComponent(`Cek produk ini di UNIQ CELL: ${p.name} - ${fmt(p.price)}\n${window.location.href}`)}`;
+
+    // Add to cart button
+    document.getElementById('btnAddCart').onclick = () => {
+      for (let i = 0; i < qty; i++) {
+        const ex = cart.find(ci => ci.id === p.id);
+        if (ex) ex.qty++; else cart.push({ id: p.id, name: p.name, price: p.price, img: p.img, qty: 1 });
+      }
+      saveCart();
+      showToast(p.name);
+      const dot = document.getElementById('cartCount');
+      dot.classList.remove('bump'); void dot.offsetWidth; dot.classList.add('bump');
+    };
+
+    // Related products
+    loadRelated(p);
+  }
+
+  /* ── Related products ── */
+  function loadRelated(currentProduct) {
+    const related = products.filter(p => p.kategori === currentProduct.kategori && p.id !== currentProduct.id);
+    const others  = products.filter(p => p.kategori !== currentProduct.kategori).slice(0, 3 - related.length);
+    const list    = [...related, ...others].slice(0, 3);
+
+    document.getElementById('relatedTitle').textContent = `Produk ${catLabel[currentProduct.kategori]} Lainnya`;
+    const grid = document.getElementById('relatedGrid');
+    grid.innerHTML = '';
+    list.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'prod-card';
+      el.innerHTML = `
+        <div class="prod-img-wrap">
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+          <div class="prod-cat-badge ${p.kategori}"><i class="bi ${catIcon[p.kategori]}"></i> ${catLabel[p.kategori]}</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name">${p.name}</div>
+          <div class="prod-spec">${p.spec}</div>
+          <div class="prod-price-sm">${fmt(p.price)}</div>
+          <div class="prod-actions-sm">
+            <button class="btn-addcart-sm" data-id="${p.id}"><i class="bi bi-bag-plus"></i> Keranjang</button>
+            <a class="btn-wa-sm" target="_blank"
+              href="https://wa.me/${WA}?text=${encodeURIComponent(`Halo, saya ingin info:\n*${p.name}*\nHarga: ${fmt(p.price)}`)}">
+              <i class="bi bi-whatsapp"></i> WA
+            </a>
+          </div>
+        </div>`;
+      el.querySelector('.prod-img-wrap').addEventListener('click', () => {
+        window.location.href = `product.html?id=${p.id}`;
+      });
+      el.querySelector('.prod-name').addEventListener('click', () => {
+        window.location.href = `product.html?id=${p.id}`;
+      });
+      el.querySelector('.btn-addcart-sm').addEventListener('click', () => addToCart(p.id));
+      grid.appendChild(el);
+    });
+  }
+
+  /* ── QTY selector ── */
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    if (qty > 1) { qty--; document.getElementById('qtyNum').textContent = qty; }
+  });
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    qty++; document.getElementById('qtyNum').textContent = qty;
+  });
+
+  /* ── Cart ── */
+  const saveCart = () => { localStorage.setItem('uniqcell_cart', JSON.stringify(cart)); renderCart(); };
+
+  function addToCart(id) {
+    const p = products.find(x => x.id === id); if (!p) return;
+    const ex = cart.find(i => i.id === id);
+    if (ex) ex.qty++; else cart.push({ id: p.id, name: p.name, price: p.price, img: p.img, qty: 1 });
+    saveCart();
+    showToast(p.name);
+    const dot = document.getElementById('cartCount');
+    dot.classList.remove('bump'); void dot.offsetWidth; dot.classList.add('bump');
+  }
+
+  const removeFromCart = id => { cart = cart.filter(i => i.id !== id); saveCart(); };
+  function changeQty(id, d) { const i = cart.find(x => x.id === id); if (!i) return; i.qty += d; if (i.qty <= 0) removeFromCart(id); else saveCart(); }
+  const clearCart = () => { cart = []; saveCart(); };
+
+  function renderCart() {
+    const count = cart.reduce((a, i) => a + i.qty, 0);
+    const total = cart.reduce((a, i) => a + i.price * i.qty, 0);
+    document.getElementById('cartCount').textContent = count;
+    document.getElementById('cartTotal').textContent = fmt(total);
+    document.getElementById('checkoutBtn').disabled = cart.length === 0;
+    document.getElementById('clearBtn').disabled = cart.length === 0;
+    const body = document.getElementById('cartBody');
+    if (!cart.length) { body.innerHTML = `<div class="cart-empty"><i class="bi bi-bag"></i><span>Keranjang kosong</span></div>`; return; }
+    body.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <img src="${item.img}" class="c-img" alt="${item.name}">
+        <div style="flex:1">
+          <div class="c-name">${item.name}</div>
+          <div class="c-price">${fmt(item.price)}</div>
+          <div class="c-qty">
+            <button class="qty-btn" onclick="changeQty(${item.id},-1)"><i class="bi bi-dash"></i></button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty(${item.id},1)"><i class="bi bi-plus"></i></button>
+            <button class="c-remove" onclick="removeFromCart(${item.id})"><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    if (!cart.length) return;
+    let msg = `Halo *${CONFIG.storeName}*, saya ingin memesan:\n\n`, total = 0;
+    cart.forEach(i => { const s = i.price * i.qty; total += s; msg += `• ${i.name} ×${i.qty} = ${fmt(s)}\n`; });
+    msg += `\n*Total: ${fmt(total)}*\n\nMohon konfirmasi, terima kasih!`;
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+  document.getElementById('clearBtn').addEventListener('click', () => { if (confirm('Kosongkan keranjang?')) clearCart(); });
+
+  /* ── Cart panel ── */
+  const panel = document.getElementById('cartPanel'), overlay = document.getElementById('cartOverlay');
+  const openCart  = () => { panel.classList.add('open'); overlay.classList.add('open'); };
+  const closeCart = () => { panel.classList.remove('open'); overlay.classList.remove('open'); };
+  document.getElementById('cartToggle').addEventListener('click', openCart);
+  document.getElementById('cartClose').addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+
+  /* ── Toast ── */
+  function showToast(name) {
+    const stack = document.getElementById('toastStack');
+    const el = document.createElement('div'); el.className = 'toast-card';
+    el.innerHTML = `<span class="toast-ico"><i class="bi bi-bag-check-fill"></i></span><span class="toast-txt">${name} ditambahkan!</span>`;
+    stack.appendChild(el);
+    setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 280); }, 3000);
+  }
+
+  /* ── Tabs ── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ── Hamburger ── */
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobNav');
+  ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
+
+  /* ── Share ── */
+  function shareToFb() {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+  }
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => showToast('Link disalin!'));
+  }
+
+  /* ── INIT ── */
+  loadProduct();
+  renderCart();
+</script>
+</body>
+</html>
