@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNIQ CELL | Laptop, CCTV & Jaringan</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background-color: #f8fafc; }
+    .navbar { background-color: #0b2b40 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .navbar-brand, .nav-link { color: white !important; font-weight: 500; }
+    .nav-link:hover { color: #ffc107 !important; }
+    .hero {
+      background: linear-gradient(135deg, #0b2b40 0%, #1a4b6d 100%);
+      color: white; padding: 80px 0; margin-bottom: 40px;
+    }
+    .hero h1 { font-size: 3rem; font-weight: 700; text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+    .hero .lead { font-size: 1.3rem; opacity: 0.95; }
+    .section-title {
+      position: relative; font-weight: 700; margin-bottom: 40px; padding-bottom: 15px; color: #0b2b40;
+    }
+    .section-title::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 4px; background-color: #ffc107; border-radius: 2px;
+    }
+    .card {
+      border: none; border-radius: 20px; box-shadow: 0 12px 24px -8px rgba(0,40,80,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; height: 100%; background: white;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -8px rgba(0,60,120,0.25); }
+    .card-img-top { height: 200px; object-fit: cover; background-color: #e9ecef; }
+    .card-body { padding: 1.5rem; }
+    .card-title { font-weight: 700; font-size: 1.25rem; color: #0b2b40; }
+    .card-text { color: #4a5a6e; margin-bottom: 0.5rem; }
+    .price { font-size: 1.4rem; font-weight: 700; color: #1e6f5c; margin: 0.75rem 0; }
+    .btn-wa {
+      background-color: #25D366; color: white; border-radius: 50px; padding: 10px 20px;
+      font-weight: 600; border: none; transition: background-color 0.2s;
+    }
+    .btn-wa:hover { background-color: #128C7E; color: white; }
+    .btn-outline-cart {
+      border: 1px solid #0b2b40; color: #0b2b40; border-radius: 50px; padding: 10px 20px;
+      font-weight: 600; background: white; transition: 0.2s;
+    }
+    .btn-outline-cart:hover { background: #0b2b40; color: white; }
+    .category-badge {
+      background-color: #e9f0f5; color: #1a4b6d; padding: 5px 15px; border-radius: 30px;
+      font-weight: 600; font-size: 0.9rem; display: inline-block; margin-bottom: 15px;
+    }
+    footer {
+      background-color: #0b2b40; color: white; padding: 40px 0 20px; margin-top: 60px;
+    }
+    .footer-link { color: #ffc107; text-decoration: none; }
+    .footer-link:hover { text-decoration: underline; }
+    .fade-item { opacity: 0; transform: translateY(20px); }
+    .cart-badge {
+      background-color: #ffc107; color: #0b2b40; font-weight: bold; margin-left: 5px;
+    }
+    .offcanvas-cart-img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+    .cart-item-quantity { width: 70px; display: inline-block; }
+    /* Toast notifikasi */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1100;
+    }
+    .toast-notif {
+      background-color: #fff;
+      border-left: 5px solid #25D366;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar dengan Cart Icon -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-laptop me-2"></i>UNIQ CELL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+          <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas">
+              <i class="bi bi-cart3"></i> <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">0</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Cart -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="cartOffcanvasLabel"><i class="bi bi-cart3 me-2"></i>Keranjang Belanja</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cartItemsContainer">
+        <!-- konten cart akan diisi js -->
+        <p class="text-muted text-center">Keranjang kosong</p>
+      </div>
+      <div class="mt-4 d-grid gap-2">
+        <button id="checkoutWA" class="btn btn-wa" disabled><i class="bi bi-whatsapp"></i> Checkout via WhatsApp</button>
+        <button id="clearCart" class="btn btn-outline-secondary" disabled>Kosongkan Keranjang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifikasi Container -->
+  <div class="toast-container">
+    <div id="cartToast" class="toast toast-notif" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
+      <div class="toast-header bg-success text-white">
+        <i class="bi bi-cart-check-fill me-2"></i>
+        <strong class="me-auto">UNIQ CELL</strong>
+        <small>baru saja</small>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <span id="toastMessage">Produk ditambahkan ke keranjang.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold hero-title">Solusi Teknologi Terpercaya</h1>
+      <p class="lead hero-subtitle">Laptop, CCTV, dan Perangkat Jaringan Berkualitas</p>
+      <a href="#produk" class="btn btn-warning btn-lg mt-3 px-5 py-3 fw-bold">Lihat Produk <i class="bi bi-arrow-down-short"></i></a>
+    </div>
+  </section>
+
+  <!-- Produk Section -->
+  <section id="produk" class="container py-5">
+    <h2 class="text-center section-title">Kategori Produk</h2>
+    
+    <!-- Laptop -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <i class="bi bi-laptop fs-1" style="color:#0b2b40;"></i>
+        <h3 class="mb-0 fw-bold">Laptop Terbaru</h3>
+      </div>
+      <div class="row g-4" id="laptop-list"></div>
+    </div>
+
+    <!-- CCTV -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <i class="bi bi-camera-video fs-1" style="color:#0b2b40;"></i>
+        <h3 class="mb-0 fw-bold">CCTV & Keamanan</h3>
+      </div>
+      <div class="row g-4" id="cctv-list"></div>
+    </div>
+
+    <!-- Jaringan & Kabel -->
+    <div class="mb-5">
+      <div class="d-flex align-items-center gap-3 mb-4">
+        <i class="bi bi-router fs-1" style="color:#0b2b40;"></i>
+        <h3 class="mb-0 fw-bold">Jaringan & Kabel</h3>
+      </div>
+      <div class="row g-4" id="jaringan-list"></div>
+    </div>
+  </section>
+
+  <!-- Kontak Section -->
+  <section id="kontak" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center section-title">Hubungi Kami</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <p class="fs-5">Butuh bantuan? Konsultasi gratis via WhatsApp.</p>
+          <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20konsultasi%20produk%20UNIQ CELL" target="_blank" class="btn btn-wa btn-lg px-5 py-3"><i class="bi bi-whatsapp"></i> Chat Admin</a>
+            <a href="mailto:sales@UNIQ CELL.id" class="btn btn-outline-secondary btn-lg px-5 py-3"><i class="bi bi-envelope"></i> Email</a>
+          </div>
+          <div class="mt-5">
+            <p><i class="bi bi-telephone-fill me-2"></i> +62 812-3456-7890</p>
+            <p><i class="bi bi-shop me-2"></i> Jl. Teknologi No. 10, Jakarta</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5><i class="bi bi-laptop me-2"></i>UNIQ CELL</h5>
+          <p>Menyediakan laptop, CCTV, dan perangkat jaringan berkualitas.</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#home" class="footer-link">Home</a></li>
+            <li><a href="#produk" class="footer-link">Produk</a></li>
+            <li><a href="#kontak" class="footer-link">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Ikuti Kami</h5>
+          <div class="d-flex gap-3 fs-4">
+            <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="bg-light">
+      <p class="text-center mb-0">&copy; 2025 UNIQ CELL. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    // ==================== KONFIGURASI ====================
+    const WA_NUMBER = '6281234567890'; // Ganti dengan nomor WhatsApp Anda
+
+    // Data produk
+    const products = [
+      // Laptop
+      { id: 1, kategori: 'laptop', img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'Lenovo ThinkPad X1 Carbon', spec: 'Intel i7, 16GB RAM, 512GB SSD', price: 18999000 },
+      { id: 2, kategori: 'laptop', img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'MacBook Pro 14 M3', spec: 'Apple M3 Pro, 18GB RAM, 1TB SSD', price: 32999000 },
+      { id: 3, kategori: 'laptop', img: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'Dell XPS 13 Plus', spec: 'Intel i7, 16GB RAM, 512GB OLED', price: 24499000 },
+      // CCTV
+      { id: 4, kategori: 'cctv', img: 'https://images.unsplash.com/photo-1558005530-a7958896ec60?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'Hikvision 4MP Dome', spec: 'IR 30m, IP67, 2.8mm', price: 1250000 },
+      { id: 5, kategori: 'cctv', img: 'https://images.unsplash.com/photo-1563019030-95fb9b5e8c3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'Dahua 8MP PTZ', spec: '25x zoom, IR 100m, auto-tracking', price: 4890000 },
+      { id: 6, kategori: 'cctv', img: 'https://images.unsplash.com/photo-1557323769-21c6d5aed4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'TP-Link Tapo C320WS', spec: '2K QHD, night vision, two-way audio', price: 850000 },
+      // Jaringan
+      { id: 7, kategori: 'jaringan', img: 'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'MikroTik RB951Ui-2HnD', spec: '2.4GHz, 5 port LAN, PoE', price: 650000 },
+      { id: 8, kategori: 'jaringan', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'TP-Link TL-SG108 Switch', spec: '8 port Gigabit, metal', price: 380000 },
+      { id: 9, kategori: 'jaringan', img: 'https://images.unsplash.com/photo-1621977712311-3f5e4b8b5f9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', name: 'Kabel LAN UTP Cat6 (50m)', spec: 'Pure copper, 550MHz', price: 350000 }
+    ];
+
+    // Render produk ke dalam HTML
+    function renderProducts() {
+      const laptopList = document.getElementById('laptop-list');
+      const cctvList = document.getElementById('cctv-list');
+      const jaringanList = document.getElementById('jaringan-list');
+
+      products.forEach(prod => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 fade-item';
+        col.innerHTML = `
+          <div class="card">
+            <img src="${prod.img}" class="card-img-top" alt="${prod.name}">
+            <div class="card-body">
+              <span class="category-badge"><i class="bi ${prod.kategori === 'laptop' ? 'bi-laptop' : (prod.kategori === 'cctv' ? 'bi-camera-video' : 'bi-router')} me-1"></i>${prod.kategori === 'laptop' ? 'Laptop' : (prod.kategori === 'cctv' ? 'CCTV' : 'Jaringan')}</span>
+              <h5 class="card-title">${prod.name}</h5>
+              <p class="card-text">${prod.spec}</p>
+              <div class="price">Rp ${prod.price.toLocaleString('id-ID')}</div>
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-cart flex-grow-1 add-to-cart" data-id="${prod.id}"><i class="bi bi-cart-plus"></i> Keranjang</button>
+                <a href="https://wa.me/${WA_NUMBER}?text=Halo%20saya%20ingin%20memesan%20${encodeURIComponent(prod.name)}%20(Rp%20${prod.price.toLocaleString('id-ID')})" target="_blank" class="btn btn-wa flex-grow-1"><i class="bi bi-whatsapp"></i> WA</a>
+              </div>
+            </div>
+          </div>
+        `;
+        if (prod.kategori === 'laptop') laptopList.appendChild(col);
+        else if (prod.kategori === 'cctv') cctvList.appendChild(col);
+        else if (prod.kategori === 'jaringan') jaringanList.appendChild(col);
+      });
+    }
+
+    // ==================== KERANJANG (CART) ====================
+    let cart = JSON.parse(localStorage.getItem('UNIQ CELL_cart')) || [];
+
+    function saveCart() {
+      localStorage.setItem('UNIQ CELL_cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCartItems();
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cartCount').innerText = count;
+      const checkoutBtn = document.getElementById('checkoutWA');
+      const clearBtn = document.getElementById('clearCart');
+      if (cart.length === 0) {
+        checkoutBtn.disabled = true;
+        clearBtn.disabled = true;
+      } else {
+        checkoutBtn.disabled = false;
+        clearBtn.disabled = false;
+      }
+    }
+
+    // Inisialisasi toast
+    let toastEl = document.getElementById('cartToast');
+    let toast = new bootstrap.Toast(toastEl);
+
+    function showToast(productName) {
+      document.getElementById('toastMessage').innerText = `✓ ${productName} ditambahkan ke keranjang.`;
+      toast.show();
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id == productId);
+      if (!product) return;
+      const existing = cart.find(item => item.id == productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          img: product.img
+        });
+      }
+      saveCart();
+      showToast(product.name);
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id != productId);
+      saveCart();
+    }
+
+    function updateQuantity(productId, newQty) {
+      const item = cart.find(i => i.id == productId);
+      if (item) {
+        if (newQty <= 0) {
+          removeFromCart(productId);
+        } else {
+          item.quantity = newQty;
+          saveCart();
+        }
+      }
+    }
+
+    function clearCart() {
+      cart = [];
+      saveCart();
+    }
+
+    function renderCartItems() {
+      const container = document.getElementById('cartItemsContainer');
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-muted text-center">Keranjang kosong</p>';
+        return;
+      }
+      let html = '';
+      cart.forEach(item => {
+        html += `
+          <div class="d-flex gap-3 mb-3 align-items-center border-bottom pb-2">
+            <img src="${item.img}" class="offcanvas-cart-img" alt="${item.name}">
+            <div class="flex-grow-1">
+              <h6 class="mb-0">${item.name}</h6>
+              <small class="text-muted">Rp ${item.price.toLocaleString('id-ID')}</small>
+              <div class="d-flex align-items-center mt-2">
+                <button class="btn btn-sm btn-outline-secondary qty-down" data-id="${item.id}">-</button>
+                <span class="mx-2 cart-item-quantity text-center">${item.quantity}</span>
+                <button class="btn btn-sm btn-outline-secondary qty-up" data-id="${item.id}">+</button>
+                <button class="btn btn-sm btn-outline-danger ms-2 remove-item" data-id="${item.id}"><i class="bi bi-trash"></i></button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+
+      document.querySelectorAll('.qty-down').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          const item = cart.find(i => i.id == id);
+          if (item) updateQuantity(id, item.quantity - 1);
+        });
+      });
+      document.querySelectorAll('.qty-up').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          const item = cart.find(i => i.id == id);
+          if (item) updateQuantity(id, item.quantity + 1);
+        });
+      });
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          removeFromCart(id);
+        });
+      });
+    }
+
+    function checkoutViaWA() {
+      if (cart.length === 0) return;
+      let message = 'Halo, saya ingin memesan:\n\n';
+      let total = 0;
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        message += `- ${item.name} (${item.quantity} pcs) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+      });
+      message += `\nTotal: Rp ${total.toLocaleString('id-ID')}\n\nMohon info lebih lanjut.`;
+      const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(waLink, '_blank');
+    }
+
+    // ==================== INISIALISASI ====================
+    window.addEventListener('load', () => {
+      renderProducts();
+      updateCartCount();
+      renderCartItems();
+
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.add-to-cart')) {
+          const btn = e.target.closest('.add-to-cart');
+          const id = btn.dataset.id;
+          addToCart(id);
+        }
+      });
+
+      document.getElementById('checkoutWA').addEventListener('click', checkoutViaWA);
+      document.getElementById('clearCart').addEventListener('click', () => {
+        if (confirm('Kosongkan keranjang?')) clearCart();
+      });
+
+      // GSAP Animations
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.from('.hero-title', { duration: 1, y: -50, opacity: 0, ease: 'power2.out' });
+      gsap.from('.hero-subtitle', { duration: 1, y: 30, opacity: 0, delay: 0.3, ease: 'power2.out' });
+      gsap.from('.hero .btn', { duration: 1, scale: 0.8, opacity: 0, delay: 0.6, ease: 'back.out(1.7)' });
+
+      gsap.utils.toArray('.fade-item').forEach((item) => {
+        gsap.fromTo(item, 
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: item, start: 'top 85%', once: true } }
+        );
+      });
+    });
+  </script>
+</body>
+</html>
